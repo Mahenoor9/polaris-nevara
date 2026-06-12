@@ -1,0 +1,1567 @@
+{
+  "id": "bfb1d521-c50f-4746-8702-0c741dc18ee9",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.audit_logs": {
+      "name": "audit_logs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "action_type": {
+          "name": "action_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "entity_type": {
+          "name": "entity_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "entity_id": {
+          "name": "entity_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timestamp": {
+          "name": "timestamp",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "audit_logs_user_id_idx": {
+          "name": "audit_logs_user_id_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "audit_logs_action_type_idx": {
+          "name": "audit_logs_action_type_idx",
+          "columns": [
+            {
+              "expression": "action_type",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "audit_logs_timestamp_idx": {
+          "name": "audit_logs_timestamp_idx",
+          "columns": [
+            {
+              "expression": "timestamp",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.mrv_audit_log": {
+      "name": "mrv_audit_log",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "logged_at": {
+          "name": "logged_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "event_type": {
+          "name": "event_type",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "payload": {
+          "name": "payload",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sha256_hash": {
+          "name": "sha256_hash",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prev_hash": {
+          "name": "prev_hash",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scorer_version": {
+          "name": "scorer_version",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "idx_audit_project": {
+          "name": "idx_audit_project",
+          "columns": [
+            {
+              "expression": "project_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.mrv_scores": {
+      "name": "mrv_scores",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scored_at": {
+          "name": "scored_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "trust_score": {
+          "name": "trust_score",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "confidence": {
+          "name": "confidence",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "baseline_ndvi": {
+          "name": "baseline_ndvi",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_ndvi": {
+          "name": "current_ndvi",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ndvi_delta_pct": {
+          "name": "ndvi_delta_pct",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "canopy_pct": {
+          "name": "canopy_pct",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ecosystem_factor": {
+          "name": "ecosystem_factor",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "area_ha": {
+          "name": "area_ha",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "red_flag": {
+          "name": "red_flag",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "data_gap_months": {
+          "name": "data_gap_months",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "report_pdf_url": {
+          "name": "report_pdf_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "report_html": {
+          "name": "report_html",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "input_hash": {
+          "name": "input_hash",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "output_hash": {
+          "name": "output_hash",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scoring_version": {
+          "name": "scoring_version",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'v1.0'"
+        }
+      },
+      "indexes": {
+        "idx_mrv_project": {
+          "name": "idx_mrv_project",
+          "columns": [
+            {
+              "expression": "project_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_mrv_scored_at": {
+          "name": "idx_mrv_scored_at",
+          "columns": [
+            {
+              "expression": "scored_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "mrv_scores_project_id_projects_id_fk": {
+          "name": "mrv_scores_project_id_projects_id_fk",
+          "tableFrom": "mrv_scores",
+          "tableTo": "projects",
+          "columnsFrom": [
+            "project_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ndvi_measurements": {
+      "name": "ndvi_measurements",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "measured_at": {
+          "name": "measured_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "ndvi_mean": {
+          "name": "ndvi_mean",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ndvi_min": {
+          "name": "ndvi_min",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ndvi_max": {
+          "name": "ndvi_max",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cloud_cover_pct": {
+          "name": "cloud_cover_pct",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "satellite_source": {
+          "name": "satellite_source",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Sentinel-2'"
+        },
+        "polygon": {
+          "name": "polygon",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw_gee_response": {
+          "name": "raw_gee_response",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_ndvi_project_id": {
+          "name": "idx_ndvi_project_id",
+          "columns": [
+            {
+              "expression": "project_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_ndvi_measured_at": {
+          "name": "idx_ndvi_measured_at",
+          "columns": [
+            {
+              "expression": "measured_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "ndvi_measurements_project_id_projects_id_fk": {
+          "name": "ndvi_measurements_project_id_projects_id_fk",
+          "tableFrom": "ndvi_measurements",
+          "tableTo": "projects",
+          "columnsFrom": [
+            "project_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.projects": {
+      "name": "projects",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "location": {
+          "name": "location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "area": {
+          "name": "area",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ecosystem_type": {
+          "name": "ecosystem_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "plantation_type": {
+          "name": "plantation_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "annual_co2": {
+          "name": "annual_co2",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lifetime_co2": {
+          "name": "lifetime_co2",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "co2_captured": {
+          "name": "co2_captured",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "credits_earned": {
+          "name": "credits_earned",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "status": {
+          "name": "status",
+          "type": "project_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "proof_file_url": {
+          "name": "proof_file_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "verifier_id": {
+          "name": "verifier_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rejection_reason": {
+          "name": "rejection_reason",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "clarification_note": {
+          "name": "clarification_note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "submitted_at": {
+          "name": "submitted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "land_boundary": {
+          "name": "land_boundary",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "polygon": {
+          "name": "polygon",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "centroid": {
+          "name": "centroid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bbox": {
+          "name": "bbox",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "area_hectares": {
+          "name": "area_hectares",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "perimeter_km": {
+          "name": "perimeter_km",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "admin_region": {
+          "name": "admin_region",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timezone": {
+          "name": "timezone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "monitoring_frequency": {
+          "name": "monitoring_frequency",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "next_monitoring_due": {
+          "name": "next_monitoring_due",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "baseline_completed_at": {
+          "name": "baseline_completed_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "registry_id": {
+          "name": "registry_id",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "archived_at": {
+          "name": "archived_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_listed": {
+          "name": "is_listed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "mrv_status": {
+          "name": "mrv_status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'NONE'"
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "projects_user_id_idx": {
+          "name": "projects_user_id_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "projects_status_idx": {
+          "name": "projects_status_idx",
+          "columns": [
+            {
+              "expression": "status",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "projects_verifier_id_idx": {
+          "name": "projects_verifier_id_idx",
+          "columns": [
+            {
+              "expression": "verifier_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "projects_user_id_users_id_fk": {
+          "name": "projects_user_id_users_id_fk",
+          "tableFrom": "projects",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "projects_verifier_id_users_id_fk": {
+          "name": "projects_verifier_id_users_id_fk",
+          "tableFrom": "projects",
+          "tableTo": "users",
+          "columnsFrom": [
+            "verifier_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "user_role",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location": {
+          "name": "location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "credits_purchased": {
+          "name": "credits_purchased",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "reward_points": {
+          "name": "reward_points",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.warnings": {
+      "name": "warnings",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "contributor_id": {
+          "name": "contributor_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "message": {
+          "name": "message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "severity": {
+          "name": "severity",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "warnings_contributor_id_users_id_fk": {
+          "name": "warnings_contributor_id_users_id_fk",
+          "tableFrom": "warnings",
+          "tableTo": "users",
+          "columnsFrom": [
+            "contributor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "eco_monitoring.environmental_observations": {
+      "name": "environmental_observations",
+      "schema": "eco_monitoring",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "monitoring_cycle_id": {
+          "name": "monitoring_cycle_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "observation_type": {
+          "name": "observation_type",
+          "type": "observation_type",
+          "typeSchema": "eco_monitoring",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "observed_at": {
+          "name": "observed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value_mean": {
+          "name": "value_mean",
+          "type": "numeric(12, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value_min": {
+          "name": "value_min",
+          "type": "numeric(12, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value_max": {
+          "name": "value_max",
+          "type": "numeric(12, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value_stddev": {
+          "name": "value_stddev",
+          "type": "numeric(12, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value_median": {
+          "name": "value_median",
+          "type": "numeric(12, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value_distribution": {
+          "name": "value_distribution",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value_unit": {
+          "name": "value_unit",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spatial_coverage_pct": {
+          "name": "spatial_coverage_pct",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raster_asset_path": {
+          "name": "raster_asset_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "thumbnail_path": {
+          "name": "thumbnail_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tile_layer_path": {
+          "name": "tile_layer_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source_dataset": {
+          "name": "source_dataset",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source_image_id": {
+          "name": "source_image_id",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source_date": {
+          "name": "source_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source_resolution_m": {
+          "name": "source_resolution_m",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "processing_algorithm": {
+          "name": "processing_algorithm",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "processing_parameters": {
+          "name": "processing_parameters",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "confidence": {
+          "name": "confidence",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "quality_flag": {
+          "name": "quality_flag",
+          "type": "observation_quality_flag",
+          "typeSchema": "eco_monitoring",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_env_obs_project_type_observed_at": {
+          "name": "idx_env_obs_project_type_observed_at",
+          "columns": [
+            {
+              "expression": "project_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "observation_type",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "observed_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_env_obs_monitoring_cycle_id": {
+          "name": "idx_env_obs_monitoring_cycle_id",
+          "columns": [
+            {
+              "expression": "monitoring_cycle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "eco_monitoring.monitoring_cycles": {
+      "name": "monitoring_cycles",
+      "schema": "eco_monitoring",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cycle_number": {
+          "name": "cycle_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cycle_type": {
+          "name": "cycle_type",
+          "type": "monitoring_cycle_type",
+          "typeSchema": "eco_monitoring",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "monitoring_cycle_status",
+          "typeSchema": "eco_monitoring",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'pending'"
+        },
+        "triggered_by": {
+          "name": "triggered_by",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "imagery_acquired_at": {
+          "name": "imagery_acquired_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "analysis_completed_at": {
+          "name": "analysis_completed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_started_at": {
+          "name": "review_started_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "completed_at": {
+          "name": "completed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "satellite_imagery_refs": {
+          "name": "satellite_imagery_refs",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cloud_cover_pct": {
+          "name": "cloud_cover_pct",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "quality_flags": {
+          "name": "quality_flags",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "error_log": {
+          "name": "error_log",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_monitoring_cycles_project_status": {
+          "name": "idx_monitoring_cycles_project_status",
+          "columns": [
+            {
+              "expression": "project_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "status",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_monitoring_cycles_created_at": {
+          "name": "idx_monitoring_cycles_created_at",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "eco_monitoring.project_site_profiles": {
+      "name": "project_site_profiles",
+      "schema": "eco_monitoring",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "profile_version": {
+          "name": "profile_version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "detected_ecosystem_type": {
+          "name": "detected_ecosystem_type",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "land_cover_composition": {
+          "name": "land_cover_composition",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dominant_land_cover": {
+          "name": "dominant_land_cover",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "elevation_min_m": {
+          "name": "elevation_min_m",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "elevation_max_m": {
+          "name": "elevation_max_m",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "elevation_mean_m": {
+          "name": "elevation_mean_m",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "slope_mean_deg": {
+          "name": "slope_mean_deg",
+          "type": "numeric(8, 3)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "slope_max_deg": {
+          "name": "slope_max_deg",
+          "type": "numeric(8, 3)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "aspect_dominant": {
+          "name": "aspect_dominant",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nearest_water_body_name": {
+          "name": "nearest_water_body_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nearest_water_body_distance_m": {
+          "name": "nearest_water_body_distance_m",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nearest_water_body_type": {
+          "name": "nearest_water_body_type",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "climate_zone": {
+          "name": "climate_zone",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "annual_rainfall_mm": {
+          "name": "annual_rainfall_mm",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "soil_type_estimate": {
+          "name": "soil_type_estimate",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flood_risk_class": {
+          "name": "flood_risk_class",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "computed_at": {
+          "name": "computed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "source_datasets": {
+          "name": "source_datasets",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "confidence_score": {
+          "name": "confidence_score",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_project_site_profiles_project_id": {
+          "name": "idx_project_site_profiles_project_id",
+          "columns": [
+            {
+              "expression": "project_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_project_site_profiles_computed_at": {
+          "name": "idx_project_site_profiles_computed_at",
+          "columns": [
+            {
+              "expression": "computed_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.project_status": {
+      "name": "project_status",
+      "schema": "public",
+      "values": [
+        "pending",
+        "verified",
+        "rejected",
+        "needs_clarification",
+        "IDLE",
+        "RUNNING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELLED"
+      ]
+    },
+    "public.user_role": {
+      "name": "user_role",
+      "schema": "public",
+      "values": [
+        "admin",
+        "verifier",
+        "contributor"
+      ]
+    },
+    "eco_monitoring.monitoring_cycle_status": {
+      "name": "monitoring_cycle_status",
+      "schema": "eco_monitoring",
+      "values": [
+        "pending",
+        "imagery_collection",
+        "analyzing",
+        "analysis_complete",
+        "under_review",
+        "verified",
+        "flagged",
+        "failed"
+      ]
+    },
+    "eco_monitoring.monitoring_cycle_type": {
+      "name": "monitoring_cycle_type",
+      "schema": "eco_monitoring",
+      "values": [
+        "baseline",
+        "scheduled",
+        "manual",
+        "event_triggered"
+      ]
+    },
+    "eco_monitoring.observation_quality_flag": {
+      "name": "observation_quality_flag",
+      "schema": "eco_monitoring",
+      "values": [
+        "good",
+        "acceptable",
+        "low",
+        "failed"
+      ]
+    },
+    "eco_monitoring.observation_type": {
+      "name": "observation_type",
+      "schema": "eco_monitoring",
+      "values": [
+        "ndvi",
+        "evi",
+        "savi",
+        "ndwi",
+        "ndmi",
+        "nbr",
+        "bsi",
+        "land_cover",
+        "surface_temp",
+        "sar_backscatter",
+        "biomass_estimate",
+        "flood_extent",
+        "moisture_index",
+        "canopy_height",
+        "erosion_indicator",
+        "water_turbidity",
+        "vegetation_fraction",
+        "phenology_metric"
+      ]
+    }
+  },
+  "schemas": {
+    "eco_monitoring": "eco_monitoring"
+  },
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
