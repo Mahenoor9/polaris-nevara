@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MRV Report - Project {{ project_id }}</title>
+    <style>
+        body { font-family: 'Helvetica', 'Arial', sans-serif; color: #333; line-height: 1.6; margin: 40px; }
+        .header { border-bottom: 2px solid #008080; padding-bottom: 10px; margin-bottom: 30px; }
+        .logo { color: #008080; font-size: 24px; font-weight: bold; }
+        .report-meta { float: right; text-align: right; font-size: 12px; color: #666; }
+        h1 { color: #008080; margin-top: 0; }
+        .section { margin-bottom: 30px; }
+        .section-title { font-size: 18px; font-weight: bold; color: #008080; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 15px; }
+        .score-box { background: #f0fafa; border: 1px solid #cceeee; padding: 20px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; }
+        .score-value { font-size: 48px; font-weight: bold; color: #008080; }
+        .score-label { font-size: 14px; color: #666; }
+        .confidence-badge { padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        .conf-high { background: #d4edda; color: #155724; }
+        .conf-medium { background: #fff3cd; color: #856404; }
+        .conf-low { background: #f8d7da; color: #721c24; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .data-table th, .data-table td { border: 1px solid #eee; padding: 10px; text-align: left; }
+        .data-table th { background: #f9f9f9; font-weight: bold; }
+        .chart-placeholder { width: 100%; height: 300px; background: #f9f9f9; border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; color: #999; margin-top: 10px; }
+        .footer { margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px; font-size: 10px; color: #999; }
+        .hash-box { background: #f5f5f5; padding: 10px; font-family: monospace; word-break: break-all; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="report-meta">
+            Report ID: {{ report_id }}<br>
+            Generated: {{ generated_at }}
+        </div>
+        <div class="logo">NEVARA</div>
+    </div>
+
+    <h1>BlueCarbon MRV Report</h1>
+
+    <div class="section">
+        <div class="score-box">
+            <div>
+                <div class="score-label">TRUST SCORE</div>
+                <div class="score-value">{{ trust_score }}/100</div>
+            </div>
+            <div>
+                <div class="score-label">CONFIDENCE LEVEL</div>
+                <div class="confidence-badge conf-{{ confidence.lower() }}">{{ confidence }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Project Overview</div>
+        <div class="grid">
+            <div>
+                <strong>Project ID:</strong> {{ project_id }}<br>
+                <strong>Ecosystem:</strong> {{ score.ecosystem_factor }} (Factor)<br>
+                <strong>Area:</strong> {{ score.area_ha }} hectares
+            </div>
+            <div>
+                <strong>Credits Issuable:</strong> {{ score.credits_issuable }} tCO2e<br>
+                <strong>Red Flag Status:</strong> 
+                <span style="color: {{ 'red' if score.red_flag else 'green' }}">
+                    {{ 'TRIGGERED' if score.red_flag else 'NONE' }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Vegetation Analysis (NDVI)</div>
+        <p>Monthly Normalised Difference Vegetation Index (NDVI) analysis over the past 24 months.</p>
+        <div class="chart-placeholder">
+            [NDVI Time Series Chart Placeholder]
+            <!-- In production, we would embed the base64 chart here: 
+                 <img src="data:image/png;base64,{{ ndvi_chart_b64 }}" style="width: 100%;"> 
+            -->
+        </div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Baseline NDVI</th>
+                    <th>Current NDVI</th>
+                    <th>Variance (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ score.baseline_ndvi }}</td>
+                    <td>{{ score.current_ndvi }}</td>
+                    <td>{{ score.ndvi_delta_pct }}%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Score Breakdown</div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, val in score.breakdown.items() %}
+                <tr>
+                    <td>{{ key | replace('_', ' ') | title }}</td>
+                    <td>{{ val }}</td>
+                    <td>Detailed impact on trust score</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Methodology & Compliance</div>
+        <p>This report follows the Verra VM0033 methodology and IPCC 2006 guidelines for coastal wetland carbon sequestration. Satellite data is sourced from Copernicus Sentinel-2 (Level-2A) and processed via Google Earth Engine.</p>
+    </div>
+
+    <div class="footer">
+        <p>This document is cryptographically linked to the NEVARA BlueCarbon Ledger.</p>
+        <strong>Input Hash (SHA-256):</strong>
+        <div class="hash-box">{{ score.input_hash }}</div>
+        <strong>Output Hash (SHA-256):</strong>
+        <div class="hash-box">{{ score.output_hash }}</div>
+    </div>
+</body>
+</html>
