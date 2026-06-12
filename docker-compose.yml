@@ -1,0 +1,132 @@
+# ═════════════════════════════════════════════════════════════════════════════
+# NEVARA — Docker Compose (Production-ready)
+# ═════════════════════════════════════════════════════════════════════════════
+# Usage:
+#   docker compose up -d
+#   docker compose logs -f nevara-api
+#   docker compose down
+# ═════════════════════════════════════════════════════════════════════════════
+
+version: "3.9"
+
+services:
+
+  # ── Application API Server ────────────────────────────────────────────────
+  nevara-api:
+    image: nevara:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      USE_DATABASE: "true"
+      DATABASE_URL: "${DATABASE_URL:-postgres://nevara:password@postgres:5432/bluecarbon}"
+      JWT_SECRET: "${JWT_SECRET}"
+      GEE_SERVICE_URL: "${GEE_SERVICE_URL:-http://nevara-gee:5001}"
+      REDIS_URL: "${REDIS_URL:-redis://redis:6379/0}"
+      LOG_LEVEL: "${LOG_LEVEL:-info}"
+      PRIVATE_OBJECT_DIR: /data/nevara/uploads
+    volumes:
+      - nevara-data:/data/nevara
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - nevara-net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # ── Python GEE Microservice ────────────────────────────────────────────────
+  nevara-gee:
+    build: ./gee-service
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    environment:
+      GEE_SERVICE_ACCOUNT: "${GEE_SERVICE_ACCOUNT}"
+      GEE_KEY_PATH: /secrets/gee-key.json
+      PORT: 5001
+      MRV_API_KEY: "${MRV_API_KEY:-dev-secret-key}"
+    volumes:
+      - "${GEE_KEY_FILE:-./gee-key.json}:/secrets/gee-key.json:ro"
+      - nevara-data:/data/nevara
+    networks:
+      - nevara-net
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:5001/health"]
+      interval: 60s
+      timeout: 15s
+      retries: 3
+      start_period: 120s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # ── PostgreSQL 16 + PostGIS 3.4 ───────────────────────────────────────────
+  postgres:
+    image: postgis/postgis:16-3.4-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB:-bluecarbon}"
+      POSTGRES_USER: "${POSTGRES_USER:-nevara}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-password}"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nevara} -d ${POSTGRES_DB:-bluecarbon}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nevara-net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+
+  # ── Redis 7 (Queue backend + Cache) ──────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    volumes:
+      - redis-data:/data
+    networks:
+      - nevara-net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "2"
+
+volumes:
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
+  nevara-data:
+    driver: local
+
+networks:
+  nevara-net:
+    driver: bridge
