@@ -1,0 +1,13 @@
+node_modules
+dist
+.DS_Store
+server/public
+vite.config.ts.*
+*.tar.gz
+*.zip
+.env
+.env.local
+migrations/server/gee-key.json.json
+server/gee-key.json
+gee-key.json
+
