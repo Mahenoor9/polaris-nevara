@@ -1,0 +1,1356 @@
+================================================================================
+NEVARA PLATFORM — COMPLETE PAGE CONTENT STRUCTURE
+All Pages: Home + How It Works + Why NEVARA + Roadmap + About
+Format: Drop-in content for React implementation
+Audience: Institutional investors, government bodies, corporate ESG buyers
+Tone: National-scale, authoritative, technically credible, legally safe
+================================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE 1 — HOME (Landing.tsx)
+4 sections. Concise. No backend mentions. Investor-ready.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+════════════════════════════════════════════════════════════════════════════════
+NAV BAR
+════════════════════════════════════════════════════════════════════════════════
+
+Logo: NEVARA  (teal-to-emerald gradient icon + bold wordmark)
+
+Nav Links:
+  Home         → /
+  How It Works → /how-it-works
+  Why NEVARA   → /why-nevara
+  Roadmap      → /roadmap
+  About        → /about
+
+Right Side:
+  "Log in"      → /login      (text link)
+  "Get Started" → /login      (filled teal pill button)
+
+Mobile: Hamburger menu, all links, "Get Started" CTA at bottom
+
+Scroll behavior: Transparent → bg-[#040D0B]/90 + blur + bottom border on scroll
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION A — HERO
+Layout: Full viewport height. Particle canvas background. Centered.
+════════════════════════════════════════════════════════════════════════════════
+
+VISUAL LAYER (above particle canvas):
+  Glow blob top-center:    teal-900/20, 900px wide, blur-[120px]
+  Glow blob bottom-right:  emerald-900/15, 500px wide, blur-[100px]
+  Gradient fade overlay:   from-transparent → to-[#040D0B] (bottom)
+
+LIVE HASH TICKER (topmost element, above badge):
+  Style:  inline-flex, rounded-full pill, border border-teal-500/30,
+          bg-teal-500/[0.08], font-mono text-xs text-teal-300
+  Dot:    w-2 h-2, bg-teal-400, animate-pulse
+
+  Cycling every 2800ms (fade out 350ms → swap → fade in):
+    "0x4A7F…3C91 → 850 tCO₂e  VERIFIED"
+    "0x9D2B…71E4 → 1,200 tCO₂e  VERIFIED"
+    "0x1F6A…88D0 → 340 tCO₂e  VERIFIED"
+    "0xC3E8…4B2F → 2,100 tCO₂e  VERIFIED"
+    "0x7A1D…92C6 → 670 tCO₂e  VERIFIED"
+
+BADGE (below ticker):
+  Text:   "India's High-Integrity Blue Carbon Registry"
+  Style:  rounded-full, bg-teal-950/60, border border-teal-700/40,
+          text-xs font-medium text-teal-300 uppercase tracking-widest
+  Dot:    w-1.5 h-1.5, bg-teal-400, animate-ping
+
+HEADLINE (font: Syne, bold, text-5xl → text-8xl):
+  Line 1 (white):          "Where Coastlines"
+  Line 2 (teal gradient):  "Become Capital."
+  Gradient:  from-teal-300 via-emerald-300 to-cyan-400, bg-clip-text
+
+SUBTITLE (max-w-2xl, text-gray-400, text-lg → text-xl, font-light):
+  "India's high-integrity registry for blue carbon.
+   Turning 11,098 km of coastline into verified digital assets —
+   backed by the tamper-proof provenance of SHA-256 blockchain technology."
+
+CTA BUTTONS (flex-wrap, centered, gap-4):
+  Primary:   "Submit Your Project"  → /login
+             px-7 py-3.5, rounded-xl, bg-teal-500 hover:bg-teal-400,
+             text-black font-semibold, arrow icon slides right on hover
+
+  Secondary: "Explore the Registry" → /explorer
+             px-7 py-3.5, rounded-xl, border border-teal-700/50,
+             text-teal-300, bolt icon on left
+
+TRUST BADGES (flex-wrap, centered, text-xs text-gray-500, gap-x-6):
+  ⬡  Patent Filed — No. 202541114138
+  ◎  Verra VM0033 Aligned
+  ◈  CCTS 2026 Compliant
+  ◇  BEE Offset Mechanism Ready
+
+SCROLL INDICATOR:
+  Vertical gradient line (teal, h-12) + chevron-down, animate-bounce
+  Position: absolute bottom-10, centered
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION B — WHAT NEVARA DOES
+Layout: 3-Column Grid + 4-Step Workflow Row below
+bg-[#060F0C], py-28
+════════════════════════════════════════════════════════════════════════════════
+
+SECTION LABEL (text-xs, teal-500, uppercase, tracking-[0.2em]):
+  "What We Build"
+
+HEADING (Syne, text-4xl → text-5xl, text-white):
+  "Three Pillars."
+  "One Unbreakable Chain."
+
+SUBTEXT (text-gray-400, max-w-2xl, mx-auto, text-center):
+  "Every blue carbon credit issued by NEVARA is anchored by
+   three integrated systems — each solving a specific flaw
+   that has undermined carbon market credibility for decades."
+
+THREE COLUMN CARDS (lg:grid-cols-3, gap-6, mt-14):
+
+  Card 1 — High-Precision GIS Mapping
+  Border: border-teal-800/30
+  Icon: Map polygon SVG, teal-400, in teal-950/80 bg
+  Title: "High-Precision GIS Mapping"
+  Body (2 lines max):
+    "We eliminate boundary fraud and double-counting through
+     sub-metre precision polygon drawing. Every project is
+     geofenced using High-Water Line (HWL) data to ensure
+     credits are issued only for real, distinct coastal hectares."
+  Tag: "Regulatory Surplus Validation"  (small badge, text-xs)
+
+  Card 2 — AI-Powered Monitoring (MRV)
+  Border: border-emerald-800/30
+  Icon: Satellite dish SVG, emerald-400, in emerald-950/80 bg
+  Title: "AI-Powered Monitoring (MRV)"
+  Body:
+    "Our algorithms process multi-spectral satellite imagery and
+     LiDAR to calculate biomass density and soil organic carbon
+     in real time. We replace infrequent manual audits with
+     continuous digital field truth — aligned with Green Credit Rules 2025."
+  Tag: "Continuous · Unbiased · Automated"
+
+  Card 3 — Immutable Blockchain Registry
+  Border: border-blue-800/30
+  Icon: Chain/blocks SVG, blue-400, in blue-950/80 bg
+  Title: "Immutable Blockchain Registry"
+  Body:
+    "Verified data is minted onto a SHA-256 ledger, providing
+     absolute provenance. Every buyer can trace a credit back
+     to the specific coastal hectare and the local community
+     that protected it — mathematically preventing double-counting."
+  Tag: "SHA-256 + Merkle Tree Verified"
+
+4-STEP WORKFLOW (horizontal icon row, mt-16, bg-[#040D0B], p-6, rounded-2xl):
+  Heading (text-xs, text-gray-500, uppercase, tracking-widest, text-center, mb-6):
+    "The NEVARA Credit Lifecycle"
+
+  Step 1:  🗺  Map Submission
+           Icon: Map, teal-400
+           Label: "GIS Polygon"
+           Sub: "Contributor draws boundary"
+
+  Arrow →  (teal-700, thin line)
+
+  Step 2:  🛰  AI Verification
+           Icon: Satellite, emerald-400
+           Label: "MRV Engine"
+           Sub: "Canopy + Carbon score"
+
+  Arrow →
+
+  Step 3:  ⛓  Ledger Entry
+           Icon: Chain, blue-400
+           Label: "SHA-256 Block"
+           Sub: "Immutable record minted"
+
+  Arrow →
+
+  Step 4:  🏪  Market Listing
+           Icon: Store, amber-400
+           Label: "CCC Issued"
+           Sub: "Available to corporates"
+
+  Each step: flex-col, items-center, gap-2
+  Icon container: w-12 h-12, rounded-xl, bg-[color]-950/60, border
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION C — NATIONAL PROOF
+Layout: Stats grid centered. bg-[#040D0B], py-28.
+Animated count-up on scroll entry.
+════════════════════════════════════════════════════════════════════════════════
+
+SECTION LABEL: "The Opportunity"
+HEADING (Syne, text-4xl → text-5xl):
+  "Scaling India's"
+  "Blue Carbon Economy."
+
+SUBTEXT (text-gray-400, max-w-xl, mx-auto, text-center):
+  "The numbers are not projections. They are assessments from
+   India's Forest Survey, BEE carbon market data, and UNFCCC
+   blue carbon methodology research."
+
+STATS GRID (grid-cols-2 lg:grid-cols-4, gap-6, mt-14):
+  (All values count up from 0 on IntersectionObserver trigger)
+
+  Stat 1:
+    Value:   11,098
+    Unit:    km
+    Label:   "Re-Assessed Indian Coastline"
+    Sub:     "47% more blue asset potential than prior estimates"
+    Color:   teal-400
+
+  Stat 2:
+    Value:   4,991
+    Unit:    sq km
+    Label:   "Active Mangrove Area"
+    Sub:     "India's primary sequestration ecosystem"
+    Color:   emerald-400
+
+  Stat 3:
+    Value:   4.9
+    Suffix:  "M Tons"
+    Label:   "Annual CO₂e Storage Potential"
+    Sub:     "tCO₂e per year from Indian mangroves"
+    Color:   blue-400
+
+  Stat 4:
+    Value:   $49.4
+    Suffix:  "Bn"
+    Label:   "Domestic Market Value by 2030"
+    Sub:     "Projected CCTS + voluntary market combined"
+    Color:   amber-400
+
+  Style per stat card:
+    p-7, rounded-2xl, border border-white/5, bg-[#060F0C]
+    Value: text-5xl font-bold, font: Syne
+    Unit:  text-base, text-[color], font-semibold, mt-1
+    Label: text-sm text-white font-medium, mt-2
+    Sub:   text-xs text-gray-500, mt-1
+
+BOTTOM CTA (mt-12, text-center):
+  Text: "From coastline to credit — see the national scaling plan."
+  Button: "View National Roadmap →"  → /roadmap
+          px-6 py-3, rounded-xl, border border-teal-700/40,
+          text-teal-300, text-sm
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION D — FOUNDER'S VISION (Closing CTA)
+Layout: Centered. Radial teal glow background. py-32. bg-[#040D0B].
+════════════════════════════════════════════════════════════════════════════════
+
+Background FX:
+  radial-gradient at 50% 50%: rgba(20,184,166,0.12) → transparent 70%
+
+LABEL (text-xs, teal-500, uppercase, tracking-widest):
+  "The Mission"
+
+QUOTE (text-2xl → text-3xl, text-white, font-light, italic, max-w-2xl):
+  "We built NEVARA to make the protection of India's coastlines
+   economically rational for the communities who guard them —
+   and verifiable beyond any reasonable doubt for the companies
+   that fund that protection."
+
+ATTRIBUTION (text-sm, text-gray-500, mt-4):
+  "— Tahir Tamam, Founder, NEVARA · BITM Ballari, Karnataka"
+
+DIVIDER: w-px h-14, gradient teal line, mx-auto, mt-10 mb-10
+
+PROOF POINTS (flex-wrap, justify-center, gap-6, text-sm text-teal-300):
+  ⬡  Patent Filed — Application No. 202541114138
+  ◎  Live on AWS EC2
+  ◈  CCTS 2026 Aligned
+  ◇  Verra VM0033 Compatible
+  ◆  Indian Forest Survey Data
+
+CTA BUTTONS (mt-10, flex-wrap, justify-center, gap-4):
+  Primary:   "Submit Your Project"    → /login
+             px-8 py-4, bg-teal-500, text-black, font-bold, rounded-xl
+
+  Secondary: "Explore the Blockchain" → /explorer
+             px-8 py-4, border border-teal-700/40, text-teal-300, rounded-xl
+
+FOOTER LINE (mt-8, text-xs text-gray-600, text-center):
+  "© 2026 NEVARA. Built for India's coastline. Made for the planet."
+
+════════════════════════════════════════════════════════════════════════════════
+FOOTER (All Pages)
+Border-top: border-teal-900/20, py-12
+════════════════════════════════════════════════════════════════════════════════
+
+3-column layout (flex, flex-col md:flex-row, justify-between):
+
+Left:
+  Logo icon + "NEVARA" wordmark + "BlueCarbon Ledger" (text-gray-600, text-xs)
+
+Center:
+  Home · How It Works · Why NEVARA · Roadmap · About
+  (text-sm, text-gray-500, hover:text-teal-400, gap-6)
+
+Right (text-xs, text-gray-600):
+  "© 2026 NEVARA. All rights reserved."
+  "Built for India's coastline. Made for the planet."
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE 2 — HOW IT WORKS  (/how-it-works)
+Sub-hero + 4-phase technical deep dive + standards callout
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+════════════════════════════════════════════════════════════════════════════════
+SUB-HERO (bg-[#040D0B], pt-32 pb-20, centered)
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "Technical Architecture"
+TITLE (Syne, text-5xl → text-6xl, font-bold):
+  "The Science of Trust."
+
+SUBTITLE (text-xl, text-gray-400, max-w-2xl, mx-auto):
+  "How NEVARA automates integrity across the entire blue carbon
+   credit lifecycle — from coastline to corporate balance sheet."
+
+BREADCRUMB (text-xs, text-gray-600, mt-4):
+  "Home → How It Works"
+
+════════════════════════════════════════════════════════════════════════════════
+PHASE 1 — PRECISION ONBOARDING
+bg-[#060F0C], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+PHASE BADGE: "Phase 01 · GIS Onboarding"  (teal-500, text-xs, uppercase)
+
+HEADING (Syne, text-3xl → text-4xl, text-white):
+  "Mapping Land. Validating Rights."
+
+BODY (text-gray-400, text-lg, max-w-2xl, leading-relaxed):
+  "Contributors — whether state forest departments, coastal farmers,
+   or NGOs — submit land parcels through NEVARA's interactive Leaflet
+   mapping interface. The GIS engine validates three conditions before
+   onboarding can proceed:"
+
+THREE VALIDATION CHECKS (grid-cols-1 md:grid-cols-3, gap-5, mt-10):
+
+  Check 1 — Regulatory Surplus (border-teal-800/30):
+    Icon: Checkmark shield
+    Title: "Regulatory Surplus"
+    Body:
+      "The project must demonstrate additionality — the land's carbon
+       benefit must exceed what existing laws like the Coastal Regulation
+       Zone (CRZ) 2019 already mandate. A project within a protected reserve
+       does not qualify unless it provides measurable benefit beyond
+       existing conservation requirements."
+
+  Check 2 — Boundary Integrity (border-emerald-800/30):
+    Icon: Polygon/target
+    Title: "Boundary Integrity"
+    Body:
+      "Polygon coordinates are cross-referenced against High-Water Line
+       (HWL) datasets and national cadastral records to prevent overlap
+       with existing registrations. The system enforces a minimum 50-metre
+       buffer between adjacent project boundaries — eliminating
+       double-counting at the source."
+
+  Check 3 — Legal Right to Carbon (border-blue-800/30):
+    Icon: Document/legal
+    Title: "Legal Right to Carbon"
+    Body:
+      "Document verification requires land title, lease agreement, or
+       departmental authorisation letter. For tribal and community land,
+       a gram sabha resolution and Free, Prior and Informed Consent (FPIC)
+       certificate must be submitted — satisfying Forest Rights Act (FRA)
+       2006 requirements."
+
+LEGAL FRAMEWORK STRIP (mt-12, p-5, rounded-2xl, border border-white/5, bg-[#040D0B]):
+  Label: "Regulatory Compliance Layer" (text-teal-400, text-xs, font-bold)
+  Four law chips (grid-cols-2 md:grid-cols-4, gap-3):
+    ◈ Forest (Conservation) Act, 1980
+    ◈ CRZ Rules 2019
+    ◈ Forest Rights Act (FRA) 2006
+    ◈ Energy Conservation Act (Amendment) 2022
+  Style per chip: px-3 py-2, rounded-lg, border border-white/5, text-xs text-gray-400
+
+════════════════════════════════════════════════════════════════════════════════
+PHASE 2 — DIGITAL MRV
+bg-[#040D0B], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+PHASE BADGE: "Phase 02 · AI Verification"  (emerald-500)
+
+HEADING (Syne, text-3xl → text-4xl):
+  "Continuous Monitoring."
+  "Zero Manual Audits."
+
+BODY:
+  "Once onboarded, every registered project area is continuously
+   monitored by NEVARA's AI stack. We use multi-source remote sensing
+   data to track vegetation health, canopy density changes, and soil
+   carbon stock fluctuations — producing a verifiable digital record
+   of every hectare, every month."
+
+FOUR MRV DATA SOURCES (grid-cols-2 lg:grid-cols-4, gap-5, mt-10):
+
+  Source 1 — Sentinel-2 Imagery (border-teal-800/30):
+    Icon: Satellite
+    Title: "Sentinel-2 Optical Imagery"
+    Body: "10-metre resolution multispectral data from ESA's Copernicus
+           programme. NDVI (Normalized Difference Vegetation Index)
+           computed from Band 8 and Band 4 provides a daily proxy for
+           biomass density and canopy health."
+    Tag: "10m resolution · Daily cadence"
+
+  Source 2 — SAR Data (border-purple-800/30):
+    Icon: Radar waves
+    Title: "Synthetic Aperture Radar (SAR)"
+    Body: "Cloud-penetrating radar imagery ensures monitoring continuity
+           during India's monsoon season when optical imagery is
+           unavailable. SAR data captures structural changes in mangrove
+           canopy with 5-metre precision."
+    Tag: "All-weather · Structural mapping"
+
+  Source 3 — LiDAR (border-blue-800/30):
+    Icon: Scan layers
+    Title: "LiDAR Point Cloud Analysis"
+    Body: "Phase 3 integration. LiDAR returns three-dimensional canopy
+           structure data — enabling precise above-ground biomass
+           calculation without ground surveys. Required for Verra VM0033
+           v2.1 high-confidence credit issuance."
+    Tag: "Phase 3 · 3D biomass mapping"
+
+  Source 4 — Climate Data (border-amber-800/30):
+    Icon: Wind/weather
+    Title: "Climate & Tidal Correction"
+    Body: "Sea-level rise data and tidal migration models automatically
+           adjust project boundary polygons to account for shoreline
+           change over time — satisfying VM0033 v2.1's Dynamic Boundaries
+           requirement without manual intervention."
+    Tag: "VM0033 compliant · Auto-updating"
+
+CANOPY THRESHOLD CALLOUT (mt-10, p-7, rounded-2xl, border border-emerald-800/30, bg-emerald-950/10):
+  Label: "Green Credit Threshold" (text-emerald-400, font-bold)
+  Text:
+    "Carbon credits are only generated once a project site achieves
+     ≥40% canopy density — the minimum threshold set by India's
+     Green Credit Rules 2025. NEVARA's MRV engine monitors and
+     certifies this threshold continuously, ensuring credits represent
+     real, measurable restoration progress."
+  Metric badges:
+    "40%  Minimum Canopy Density"  (teal)
+    "5 Yrs  Monitoring Before First Issuance" (amber)
+    "20%  Non-Permanence Buffer Pool" (blue)
+
+════════════════════════════════════════════════════════════════════════════════
+PHASE 3 — LEDGER TOKENIZATION
+bg-[#060F0C], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+PHASE BADGE: "Phase 03 · Blockchain Minting"  (blue-500)
+
+HEADING (Syne, text-3xl → text-4xl):
+  "One Credit."
+  "One Block."
+  "One Record Forever."
+
+BODY:
+  "Every tonne of verified CO₂e sequestration is converted into a
+   unique Carbon Credit Certificate (CCC) and minted as a block on
+   NEVARA's SHA-256 + Merkle tree ledger. The chain structure ensures
+   that tampering with any record invalidates every subsequent block —
+   making retroactive fraud computationally impossible."
+
+BLOCKCHAIN ANATOMY (grid-cols-1 md:grid-cols-2, gap-8, mt-10):
+
+  Left — What Each Block Contains:
+    Heading (text-sm, text-teal-400, font-bold, mb-4): "Block Structure"
+    Item rows (space-y-3, each: flex items-center gap-3, text-sm):
+      ⬡  Block Index + Timestamp
+      ⬡  Project Coordinates (GPS polygon hash)
+      ⬡  Verified tCO₂e amount
+      ⬡  Verifier signature + methodology code
+      ⬡  Previous block hash (chain linkage)
+      ⬡  SHA-256 block hash (tamper seal)
+      ⬡  Merkle root of all transactions
+    Each item: text-gray-300, icon text-teal-500
+
+  Right — Live Hash Display:
+    Heading (text-sm, text-teal-400, font-bold, mb-4): "Sample Block Record"
+    Code block (font-mono, text-xs, text-teal-400, bg-[#040D0B], p-5, rounded-xl):
+      Block #1,247
+      Project: Gurupur Estuary, Mangalore
+      tCO₂e: 1,200.00
+      Verifier: NITK-WROE-002
+      Method: VM0033-v2.1
+      Hash: 0x9D2B...71E4
+      Prev: 0x4A7F...3C91
+      Merkle: 0xAB3E...88F2
+      Status: IMMUTABLE ✓
+
+DOUBLE-COUNTING PREVENTION (mt-10, p-7, rounded-2xl, border border-blue-800/30, bg-blue-950/10):
+  Label: "Anti-Double-Counting Architecture" (text-blue-400, font-bold)
+  Text:
+    "Once a credit is minted, it receives a unique token ID that cannot
+     be duplicated or re-issued. Once retired (used by a corporate buyer
+     for offsetting), the block is permanently marked as 'RETIRED' in
+     the public explorer — preventing the same credit from being sold
+     or claimed a second time. This is enforced at the ledger level,
+     not through administrative controls."
+
+════════════════════════════════════════════════════════════════════════════════
+PHASE 4 — MARKETPLACE ACCESS
+bg-[#040D0B], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+PHASE BADGE: "Phase 04 · Market Listing"  (amber-500)
+
+HEADING (Syne, text-3xl → text-4xl):
+  "From Registry to Revenue."
+
+BODY:
+  "Verified credits are listed on NEVARA's transparent marketplace,
+   accessible to India's 490+ CCTS-obligated industrial entities and
+   voluntary ESG buyers. Every purchase generates an instant PDF
+   certificate with an embedded QR code linking directly to the
+   originating blockchain block — providing audit-ready documentation
+   for ESG disclosures and SEBI reporting."
+
+BUYER SEGMENTS (grid-cols-1 md:grid-cols-2, gap-6, mt-10):
+
+  Segment 1 — Compliance Buyers (border-teal-800/30):
+    Label: "CCTS-Obligated Industries" (text-teal-400, text-xs, uppercase)
+    Title: "Mandatory Carbon Offset Demand"
+    Body:
+      "490 industrial entities across cement, aluminum, petrochemicals,
+       textiles, and steel sectors are now mandated under India's Carbon
+       Credit Trading Scheme (CCTS) 2026 to meet greenhouse gas intensity
+       targets. Companies that fail to meet targets must purchase verified
+       Carbon Credit Certificates (CCCs) — or face regulatory penalties.
+       NEVARA's credits are designed to satisfy BEE's Offset Mechanism
+       requirements directly."
+    Stat: "490 obligated entities · Penalty for non-compliance"
+
+  Segment 2 — Voluntary ESG Buyers (border-emerald-800/30):
+    Label: "ESG & Net Zero Commitments" (text-emerald-400, text-xs, uppercase)
+    Title: "Voluntary Carbon Demand"
+    Body:
+      "India's largest corporates — Tata Group, Infosys, Wipro, Mahindra —
+       have made net-zero commitments to investors and international
+       sustainability frameworks. NEVARA's blue carbon credits, with their
+       20–30% premium over standard forestry credits and high biodiversity
+       co-benefits, offer a compelling solution for ESG reporting, SEBI
+       Business Responsibility & Sustainability Reports (BRSR), and
+       investor-facing climate disclosures."
+    Stat: "20–30% premium over standard credits · BRSR audit-ready"
+
+CERTIFICATE CALLOUT (mt-10, p-6, rounded-2xl, border border-amber-800/30, bg-amber-950/10):
+  Label: "What a Buyer Receives" (text-amber-400, font-bold)
+  Items (grid-cols-2, gap-3, text-sm text-gray-400):
+    ◈ PDF Carbon Offset Certificate
+    ◈ QR code → live blockchain record
+    ◈ Project location coordinates
+    ◈ Verifier name + methodology
+    ◈ tCO₂e amount + vintage year
+    ◈ CCTS-ready documentation format
+
+════════════════════════════════════════════════════════════════════════════════
+STANDARDS COMPLIANCE FOOTER
+bg-[#060F0C], py-16
+════════════════════════════════════════════════════════════════════════════════
+
+HEADING (Syne, text-2xl, text-white): "Built to Every Standard That Matters."
+
+FOUR COMPLIANCE BLOCKS (grid-cols-2 md:grid-cols-4, gap-5, mt-8):
+
+  Block 1 (border-teal-800/30):
+    Code: "VM0033 v2.1"
+    Name: "Verra VCS"
+    Status: "Methodology Aligned"
+    Detail: "Additionality, Leakage, Non-Permanence, Stratification,
+             and Dynamic Boundary requirements mapped to NEVARA's
+             project submission workflow."
+
+  Block 2 (border-purple-800/30):
+    Code: "GS4GG"
+    Name: "Gold Standard"
+    Status: "SDG Tracking Ready"
+    Detail: "SDG 13 (Climate Action), SDG 14 (Life Below Water),
+             and SDG 8 (Decent Work) auto-tagged on all projects.
+             Safeguarding assessment included in contributor flow."
+
+  Block 3 (border-emerald-800/30):
+    Code: "CCTS 2026"
+    Name: "BEE India"
+    Status: "Offset Mechanism Ready"
+    Detail: "NEVARA's CCC format is designed to satisfy the Bureau of
+             Energy Efficiency's Offset Mechanism portal requirements
+             for the 490 currently obligated industrial entities."
+
+  Block 4 (border-blue-800/30):
+    Code: "Art. 6.4"
+    Name: "Paris Agreement"
+    Status: "Phase 5 Target"
+    Detail: "Cross-border carbon trading eligibility under UNFCCC
+             Article 6.4 is targeted for Phase 5 (2027), enabling
+             NEVARA credits to be traded with international entities."
+
+BOTTOM CTA: "See the National Scaling Roadmap →"  → /roadmap
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE 3 — WHY NEVARA  (/why-nevara)
+Sub-hero + market gap + equity failure + NEVARA model + outcome
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+════════════════════════════════════════════════════════════════════════════════
+SUB-HERO (bg-[#040D0B], pt-32 pb-20, centered)
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "The Problem We Solve"
+TITLE (Syne, text-5xl → text-6xl):
+  "Closing the"
+  "Integrity Gap."
+
+SUBTITLE (text-xl, text-gray-400, max-w-2xl):
+  "Blue carbon represents the world's most powerful natural climate
+   solution — and the least accessible. NEVARA exists to close
+   the $2 billion 'trust deficit' that keeps it underutilised."
+
+════════════════════════════════════════════════════════════════════════════════
+THE MARKET GAP
+bg-[#060F0C], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "Why Blue Carbon Is Underutilised"
+
+HEADING (Syne, text-3xl):
+  "The World's Best Climate Asset"
+  "Has a Measurement Problem."
+
+BODY:
+  "Coastal ecosystems — mangroves, seagrass meadows, salt marshes —
+   sequester carbon at up to 10 times the rate of tropical rainforests,
+   and store it for thousands of years in anaerobic soil. Despite this,
+   blue carbon represents less than 1% of global carbon market volume.
+   The reason is not a lack of potential — it is a lack of credible,
+   accessible measurement infrastructure."
+
+THREE GAP CARDS (lg:grid-cols-3, gap-6, mt-12):
+
+  Card 1 — Measurement Complexity (border-red-900/30):
+    Number: "01"
+    Tag: "Technical Barrier"
+    Title: "Too Complex to Measure"
+    Body:
+      "Unlike terrestrial forestry, blue carbon stocks exist in tidal
+       wetlands where traditional methods — soil cores, field surveys —
+       are expensive, dangerous, and infrequent. A single manual audit
+       can cost ₹12–50 lakh and take 6–18 months. Most project developers
+       cannot afford the scientific rigour required for institutional
+       credibility — so they simply do not enter the market."
+
+  Card 2 — Regulatory Fragmentation (border-amber-900/30):
+    Number: "02"
+    Tag: "Regulatory Barrier"
+    Title: "No India-First Framework"
+    Body:
+      "Global standards (Verra, Gold Standard) were designed for
+       international markets and do not natively support India's
+       regulatory environment — the Coastal Regulation Zone (CRZ) rules,
+       the Forest Conservation Act, the Forest Rights Act, and now the
+       Carbon Credit Trading Scheme (CCTS) 2026. There is no platform
+       that maps these frameworks together into a single contributor
+       workflow. Until NEVARA."
+
+  Card 3 — Trust Deficit (border-orange-900/30):
+    Number: "03"
+    Tag: "Market Barrier"
+    Title: "A $2 Billion Trust Deficit"
+    Body:
+      "Corporate buyers — particularly Indian conglomerates with SEBI
+       BRSR reporting obligations — cannot purchase blue carbon credits
+       they cannot audit. Without traceable, verifiable provenance, a
+       credit is merely a claim. This trust gap has historically excluded
+       some of the world's most carbon-dense ecosystems from the market
+       that could fund their protection."
+
+════════════════════════════════════════════════════════════════════════════════
+THE EQUITY FAILURE
+bg-[#040D0B], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "Who It Fails Most"
+
+HEADING (Syne, text-3xl):
+  "The Communities Who Protect"
+  "the Coastline Are Paid Last."
+
+BODY:
+  "In traditional carbon project structures, value flows upward.
+   Project developers, auditing firms, and international brokers
+   capture the majority of credit revenue. The coastal farmers,
+   fishing communities, and forest departments who actually
+   maintain and protect the ecosystems receive a fraction —
+   if anything at all."
+
+COMPARISON TABLE (mt-12, grid-cols-1 md:grid-cols-2, gap-8):
+
+  Left Column — The Old System:
+    Label: "Traditional Carbon Project" (text-red-400, uppercase, text-xs)
+    Step Rows (space-y-3):
+      [Step] Manual field audit        [Time] 6–18 months
+      [Step] International broker      [Cost] 30–40% commission
+      [Step] Third-party certification [Cost] ₹15–50 lakh per project
+      [Step] Community payment         [Share] < 20% of credit value
+      [Step] Second audit              [Time] 2+ years later
+      [Step] Credit issuance           [Trust] Unverifiable by buyer
+    Bottom Stat: "Up to 80% of value captured before community payment"
+    Color: red-900/20 bg, red-900/30 border
+
+  Right Column — The NEVARA Model:
+    Label: "NEVARA Carbon Project" (text-teal-400, uppercase, text-xs)
+    Step Rows:
+      [Step] GIS submission            [Time] Same day
+      [Step] AI MRV pre-screening      [Time] 72 hours
+      [Step] Expert verifier review    [Cost] Transparent, fixed
+      [Step] Community payment         [Share] 60% of credit value
+      [Step] Ongoing monitoring        [Mode] Continuous, automated
+      [Step] Credit issuance           [Trust] QR-linked blockchain
+    Bottom Stat: "60% of every credit sale goes directly to contributors"
+    Color: teal-950/10 bg, teal-800/30 border
+
+REVENUE SPLIT VISUAL (mt-10, p-7, rounded-2xl, border border-teal-800/30, bg-teal-950/10):
+  Label: "NEVARA Revenue Distribution" (text-teal-400, font-bold)
+  Three bar segments (horizontal, proportional):
+    60%  Contributor / Community / Government    (teal-500, text-white)
+    20%  NEVARA Platform                         (teal-800, text-gray-300)
+    20%  Verification & Audit Pool               (teal-900/60, text-gray-400)
+  Note (text-xs, text-gray-500, mt-3):
+    "Payments distributed automatically on credit sale through smart
+     contract logic — no manual processing, no administrative delay."
+
+════════════════════════════════════════════════════════════════════════════════
+THE NEVARA MODEL
+bg-[#060F0C], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "The NEVARA Difference"
+
+HEADING (Syne, text-3xl):
+  "Automated Verification."
+  "Real-Time Distribution."
+  "Full Provenance."
+
+HEAD-TO-HEAD COMPARISON (grid-cols-1 md:grid-cols-2, gap-8, mt-12):
+  (Each row: icon + dimension label + old value → new value)
+
+  Dimension: Audit Method
+    Old:   Manual field survey, 6–18 months
+    New:   AI + satellite, continuous
+    Icon:  Clock vs refresh
+
+  Dimension: Verification Cost
+    Old:   ₹15–50 lakh per project
+    New:   Transparent fixed fee, platform-subsidised for pilots
+    Icon:  Falling cost arrow
+
+  Dimension: Time to First Credit
+    Old:   2+ years from submission
+    New:   72-hour expert review, credit issued on approval
+    Icon:  Calendar vs lightning
+
+  Dimension: Community Revenue
+    Old:   < 20% of credit value
+    New:   60% of credit value, automated
+    Icon:  Low bar vs high bar
+
+  Dimension: Buyer Traceability
+    Old:   PDF certificate, no live audit trail
+    New:   QR → blockchain block → project coordinates
+    Icon:  Document vs chain
+
+  Dimension: Double-Counting Risk
+    Old:   Administrative controls only
+    New:   Mathematically impossible (SHA-256 ledger)
+    Icon:  Risk flag vs lock
+
+  Style per row: flex items-center, p-4, rounded-xl, border border-white/5,
+                 bg-[#040D0B], gap-4
+
+════════════════════════════════════════════════════════════════════════════════
+OUTCOME + CTA
+bg-[#040D0B], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+HEADING (Syne, text-3xl):
+  "The Result: Credits the Market Can Trust."
+
+BODY:
+  "NEVARA credits are not claims. They are blockchain-verified,
+   satellite-monitored, expert-reviewed records of real carbon
+   sequestration in real coastal ecosystems. For the first time,
+   Indian blue carbon can compete on the global voluntary market —
+   and satisfy the mandatory offset requirements of the CCTS 2026."
+
+OUTCOME METRICS (grid-cols-3, gap-5, mt-10):
+  "80–90%"  /  "Reduction in verification cost vs manual audit"
+  "72 hrs"  /  "Expert review turnaround (vs 6–18 months)"
+  "60%"     /  "Community revenue share (vs < 20% traditional)"
+
+CTA: "See the Technology Behind This →"  → /how-it-works
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE 4 — ROADMAP  (/roadmap)
+Merged: Current deployment + future phases + future scope (9A, 9B, 9C)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+════════════════════════════════════════════════════════════════════════════════
+SUB-HERO (bg-[#040D0B], pt-32 pb-20, centered)
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "Strategic Roadmap"
+TITLE (Syne, text-5xl → text-6xl):
+  "Scaling India's"
+  "Blue Carbon Infrastructure."
+
+SUBTITLE (text-xl, text-gray-400, max-w-2xl):
+  "From a 5-hectare pilot in Mangalore to a 1.27 billion metric ton
+   national carbon abatement potential — a five-phase progression
+   grounded in regulatory reality."
+
+════════════════════════════════════════════════════════════════════════════════
+LIVE STATUS — Q4 2025
+bg-[#060F0C], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+STATUS BADGE: "● Live Now"  (teal, animate-ping dot)
+
+HEADING (Syne, text-3xl):
+  "Mangalore Pilot."
+  "Gurupur Estuary, Karnataka."
+
+BODY:
+  "India's first AI-verified, blockchain-recorded blue carbon pilot
+   is operational. The 5-hectare site near the Gurupur river estuary
+   in Dakshina Kannada district is active, with all 14 platform
+   modules deployed on AWS EC2 — monitoring, verification, marketplace,
+   and certificate issuance all live."
+
+TWO COLUMN LAYOUT (lg:grid-cols-2, gap-12, mt-12):
+
+  Left — Live Milestones (space-y-4):
+
+    Milestone 1 (border-teal-700/50, bg-teal-950/10):
+      Status: "Live"  (teal badge + ping dot)
+      Title: "5-Hectare Pilot — Gurupur Estuary, Mangalore"
+      Body:
+        "Mangrove-dense coastal land in Dakshina Kannada district.
+         Located adjacent to NITK Surathkal and ICAR-CMFRI Mangalore —
+         India's leading marine research centres — providing direct
+         access to scientific validation and biodiversity data."
+
+    Milestone 2 (border-teal-700/40, bg-teal-950/8):
+      Status: "Live"
+      Title: "14 Platform Modules — Production Deployed"
+      Body:
+        "GIS Contributor Portal · AI Vegetation Scoring · Dual-Layer
+         Verifier Dashboard · SHA-256 Blockchain + Public Explorer ·
+         Carbon Credit Marketplace · Certificate Generator · Admin
+         Governance · Audit Logging · Role-based Access Control ·
+         Document Vault · Carbon Calculation Engine · Blue Points
+         Reward System · Object Storage · Process Manager"
+
+    Milestone 3 (border-teal-700/40, bg-teal-950/8):
+      Status: "Active"
+      Title: "Stakeholder Engagement — Mangalore Division"
+      Body:
+        "Formal engagement initiated with Mangalore Forest Division (DCF)
+         for pilot land parcel identification. OPSA Trust partnership
+         under discussion. NITK Surathkal Water Resources & Ocean
+         Engineering department in technical MRV dialogue."
+
+  Right — Live Metrics (grid-cols-2, gap-4):
+    [All count-up animated on scroll]
+    108,093 tCO₂e  /  Carbon Tracked on Ledger
+    66             /  Credits Available
+    5              /  Verified Projects
+    7,500 km       /  Coastline Targeted
+    42             /  API Endpoints
+    14             /  Platform Modules
+    72 hrs         /  Avg Verification Time
+    60%            /  Contributor Revenue Share
+
+════════════════════════════════════════════════════════════════════════════════
+PHASE TIMELINE — 5 Phases
+bg-[#040D0B], py-20
+Vertical timeline with left rail line
+════════════════════════════════════════════════════════════════════════════════
+
+HEADING (Syne, text-3xl, text-center, mb-14):
+  "The Five Phases of National Scale."
+
+Phase 1 — "Q4 2025 · Live Now"  (teal)
+  Title: "Beta Registry Launch & Mangalore Pilot"
+  Body:
+    "Platform launched with all 14 modules. First 5-hectare blue carbon
+     site registered at Gurupur Estuary. Stakeholder outreach initiated
+     with Mangalore Forest Division (DCF), NITK Surathkal, and ICAR-CMFRI.
+     GIS, AI scoring, blockchain explorer, and marketplace all operational."
+  Items: GIS Portal · AI Scoring · Blockchain Registry · Marketplace · Certificates
+
+Phase 2 — "2026 · In Progress"  (amber)
+  Title: "CCTS Integration & Satellite MRV Upgrade"
+  Body:
+    "Full integration with the Bureau of Energy Efficiency (BEE) Offset
+     Mechanism portal, making NEVARA credits eligible for the 490 obligated
+     CCTS industrial entities. Sentinel-2 satellite imagery pipeline
+     replaces heuristic AI scoring with data-driven NDVI-based assessments.
+     Razorpay payment gateway enables real INR transactions with GST invoicing."
+  Items: BEE API · Sentinel-2 · NDVI Maps · Razorpay · GST Invoicing
+
+Phase 3 — "2026 Q3–Q4 · Planned"  (gray)
+  Title: "National Expansion & Mobile Field Infrastructure"
+  Body:
+    "Platform expansion to Udupi, Karwar, and additional Karnataka coast
+     sites using the established KSCZMA network. Hedera Guardian blockchain
+     integration enables international credit interoperability. React Native
+     mobile app launches for field-based contributor reporting. LiDAR
+     pipeline activated for high-confidence above-ground biomass measurement."
+  Items: Udupi + Karwar · Hedera Guardian · Mobile App · LiDAR · Kannada UI
+
+Phase 4 — "2027 · Planned"  (gray)
+  Title: "Verra Accreditation & Global Standards Alignment"
+  Body:
+    "Pursuit of formal Verra VCS project registration under VM0033 v2.1 —
+     making NEVARA-issued credits eligible for international voluntary
+     markets and SEBI ESG disclosures. Gold Standard GS4GG certification
+     pursued for SDG tracking. Government Registry API enables automated
+     ICFRE Green Credit Programme alignment."
+  Items: Verra VM0033 · Gold Standard GS4GG · Government Registry API · SDG Tracking
+
+Phase 5 — "2027+ · Targeted"  (gray/future)
+  Title: "Article 6.4 Global Carbon Trading"
+  Body:
+    "Preparation for UNFCCC Paris Agreement Article 6.4 eligibility —
+     enabling cross-border carbon credit trading with international
+     obligated entities. This phase positions NEVARA as a bridge between
+     India's domestic market and the emerging international carbon
+     trading framework, supporting Series A fundraise targeting
+     climate-focused institutional investors."
+  Items: Article 6.4 · Cross-Border Trading · Series A · International Registry Sync
+
+════════════════════════════════════════════════════════════════════════════════
+FUTURE SCOPE — Three Strategic Pillars
+bg-[#060F0C], py-20
+(Merged Future Plans: 9A AI MRV + 9B Verra + 9C NGOs/Govt)
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "Future Scope & Partnerships"
+HEADING (Syne, text-3xl):
+  "The Infrastructure"
+  "India's Carbon Market Needs."
+
+BODY (intro, max-w-2xl, text-center):
+  "Three strategic pillars define NEVARA's path from operational platform
+   to national infrastructure — continuous AI monitoring, international
+   standards alignment, and the institutional partnership network required
+   to onboard India's government-owned coastline."
+
+PILLAR 9A — AI-Powered MRV (p-8, rounded-2xl, border border-white/5, bg-[#040D0B], mb-8):
+  Subsection Label: "Pillar A · Technology"  (teal-600, text-[10px])
+  Title (Syne, text-2xl): "From Heuristic Scores to Satellite Truth."
+  Body:
+    "NEVARA's current AI vegetation scoring uses ecosystem type, land area,
+     and GPS location as inputs — a functional heuristic. The next phase
+     replaces this with real satellite data. Sentinel-2 NDVI maps, SAR
+     structural analysis, and biogeochemical modelling will produce
+     carbon stock estimates with the confidence intervals required for
+     Verra credit issuance — at 1/10th the cost of manual field surveys."
+
+  Four Feature Cards (grid-cols-2 md:grid-cols-4, gap-4, mt-8):
+
+    Card A — Sentinel-2 (teal border):
+      Phase: "Phase 2 · 2026"
+      Title: "Sentinel-2 NDVI Integration"
+      Body: "Daily 10-metre resolution vegetation index maps for every
+             registered project — replacing monthly heuristic scoring
+             with continuous satellite truth."
+
+    Card B — SAR (purple border):
+      Phase: "Phase 2 · 2026"
+      Title: "All-Weather SAR Monitoring"
+      Body: "Cloud-penetrating radar ensures uninterrupted monitoring
+             through India's monsoon season — closing the optical
+             imagery gap that affects 4–6 months annually."
+
+    Card C — Dynamic Boundaries (emerald border):
+      Phase: "Phase 2 · 2026"
+      Title: "VM0033 Dynamic Boundaries"
+      Body: "Tidal migration models automatically update polygon
+             boundaries as coastlines shift — satisfying VM0033 v2.1's
+             sea-level-rise accounting requirement."
+
+    Card D — Peat Depletion (blue border):
+      Phase: "Phase 3 · 2026 Q3"
+      Title: "Peat Depletion Time (PDT)"
+      Body: "Biogeochemical modelling computes PDT and SDT per site,
+             ensuring credits are only issued for carbon that remains
+             stored across the 20–100 year required horizon."
+
+  Callout (mt-8, border-teal-800/30, bg-teal-950/10):
+    "NEVARA's AI MRV system targets an 80–90% reduction in verification
+     cost per credit compared to manual audit — the key unlocking factor
+     for making blue carbon economically viable at small project scale."
+
+PILLAR 9B — Verra & Standards Alignment (p-8, rounded-2xl, border border-white/5, bg-[#060F0C], mb-8):
+  Subsection Label: "Pillar B · Standards"  (purple-600, text-[10px])
+  Title (Syne, text-2xl): "Built to Verra's Specification."
+  Body:
+    "NEVARA is designed to be the operational implementation of Verra's
+     VM0033 v2.1 methodology — not a competing standard, but the
+     technology platform that makes VM0033 practical at Indian coastal scale.
+     Every feature maps to a specific compliance requirement."
+
+  VM0033 Compliance Table (space-y-3, mt-8):
+    Row: Additionality   · Mapped   · VMD0052 financial analysis module in submission form
+    Row: Leakage         · Mapped   · 2 km AI buffer zone monitoring around each polygon
+    Row: Non-Permanence  · Mapped   · 20% mandatory credit buffer pool, auto-deducted
+    Row: Stratification  · Phase 2  · GIS soil strata + salinity mapping via Sentinel-2
+    Row: Dyn. Boundaries · Phase 2  · Tidal migration auto-update (see Pillar A)
+    Style: flex, gap-4, p-4, rounded-xl, border border-white/5, bg-[#040D0B] or [#060F0C]
+    Status badge: "Mapped" = teal · "Phase 2" = amber
+
+  Gold Standard Box (mt-6, border-purple-800/30, bg-purple-950/10):
+    Title: "Gold Standard GS4GG Requirements"
+    Items (grid-cols-3, gap-4):
+      Safeguarding: FPIC certificate + safeguard questionnaire in contributor flow
+      SDG Tracking: SDG 13, 14, 8 auto-tagged on all projects
+      Public Registry: All projects listed on Gold Standard Impact Registry + blockchain
+
+PILLAR 9C — NGOs & Government Onboarding (p-8, rounded-2xl, border border-white/5, bg-[#040D0B]):
+  Subsection Label: "Pillar C · Partnerships"  (blue-600, text-[10px])
+  Title (Syne, text-2xl): "Unlocking Government-Owned Coastline."
+  Body:
+    "Over 80% of India's mangrove area is government-owned — managed by
+     State Forest Departments under the Forest Conservation Act. NEVARA
+     cannot scale without institutional partnerships. Three structured
+     onboarding pathways address the three types of institutional contributor."
+
+  Three Pathway Cards (grid-cols-1 md:grid-cols-3, gap-6, mt-8):
+
+    Card 1 — Government Bodies (teal border):
+      Label: "Government Bodies"
+      Title: "State Forest Departments & Coastal Authorities"
+      Body:
+        "NEVARA approaches government bodies as data partners, not commercial
+         clients. We offer AI-generated coastal monitoring reports, GIS
+         boundary maps of forest land, and carbon sequestration data for
+         state-level environmental reporting — in exchange for pilot land
+         access and CRZ clearance facilitation."
+      Engagement Steps:
+        1. Concept note to State Forest Dept (DCF)
+        2. Platform presentation — data sharing, no land transfer
+        3. Identify 5-ha pilot parcel
+        4. Carbon rights agreement (revenue share to Dept)
+        5. CRZ clearance for monitoring
+      Active: DCF Mangalore · KSCZMA Regional Office · Coastal Development Authority
+
+    Card 2 — NGO Partners (emerald border):
+      Label: "NGO Partners"
+      Title: "Environmental NGOs & Restoration Trusts"
+      Body:
+        "NGOs already have field teams, community relationships, and active
+         restoration sites. NEVARA adds the verification and monetisation
+         layer — converting existing conservation work into verified carbon
+         credit income streams with automated revenue distribution."
+      Engagement Steps:
+        1. Register as Contributor
+        2. Map existing sites using GIS tool
+        3. Submit project documentation
+        4. Dual-layer verification (AI + expert)
+        5. Credits issued — 60% share on sale
+      Active: OPSA Trust, Mangalore · Sahyadri Sanchaya (Dinesh Holla)
+
+    Card 3 — Research Institutions (blue border):
+      Label: "Research Institutions"
+      Title: "Universities & Marine Science Bodies"
+      Body:
+        "Research institutions provide the scientific rigour that elevates
+         NEVARA's AI-estimated scores to internationally accepted
+         methodology. NEVARA offers institutions API access, co-authorship
+         on MRV methodology papers, and research data in exchange for
+         validation, field measurement, and advisory services."
+      Engagement Steps:
+        1. Technical collaboration MoU
+        2. Coastal biodiversity + soil carbon datasets
+        3. Validate AI estimates against field data
+        4. Co-develop MRV methodology for BEE + Verra
+        5. Research Institution API (Phase 3)
+      Active: ICAR-CMFRI Mangalore (Dr. Sujitha Thomas) · NITK Surathkal WROE (Dr. Ramesh H)
+
+  Legal Framework (mt-10, grid-cols-2 md:grid-cols-4, gap-4):
+    Label: "Regulatory Compliance for Onboarding"
+    FCA 1980 · CRZ Rules 2019 · FRA 2006 · Energy Conservation Act 2022
+
+════════════════════════════════════════════════════════════════════════════════
+NATIONAL DATA STRIP
+bg-[#040D0B], py-16
+════════════════════════════════════════════════════════════════════════════════
+
+HEADING (text-sm, text-gray-500, uppercase, tracking-widest, text-center):
+  "The National Opportunity NEVARA Is Built to Capture"
+
+STATS (grid-cols-2 md:grid-cols-4, gap-6, mt-8):
+  11,098 km    /  Re-assessed Indian Coastline  /  "47% more than prior estimates"
+  5.02M Tons   /  Annual CO₂e Storage Potential  /  "From Indian mangroves alone"
+  $49.4 Billion /  Domestic Carbon Market by 2030 /  "CCTS + voluntary combined"
+  490 Entities /  CCTS-Obligated Industries 2026  /  "Active compliance demand"
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE 5 — ABOUT US  (/about)
+Mission · Founder story · Vision · Team · Advisors
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+════════════════════════════════════════════════════════════════════════════════
+SUB-HERO (bg-[#040D0B], pt-32 pb-20, centered)
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "About NEVARA"
+TITLE (Syne, text-5xl → text-6xl):
+  "Anchored in Innovation."
+
+SUBTITLE (text-xl, text-gray-400, max-w-2xl):
+  "From the engineering labs of BITM Ballari to the coastlines
+   of Karnataka — the story of building India's first institutional-grade
+   blue carbon registry from the ground up."
+
+════════════════════════════════════════════════════════════════════════════════
+THE MISSION
+bg-[#060F0C], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "Why We Exist"
+HEADING (Syne, text-3xl):
+  "To Make Coastal Protection"
+  "Economically Rational."
+
+BODY (text-lg, text-gray-400, max-w-2xl, leading-relaxed):
+  "India's 11,098 km coastline is one of the most carbon-dense natural
+   environments on the planet. Mangroves, seagrass meadows, and salt
+   marshes sequester carbon at rates that no terrestrial reforestation
+   programme can match. Yet these ecosystems remain almost entirely
+   outside the global carbon market — not because the value is absent,
+   but because the infrastructure to capture it did not exist."
+
+SECOND PARAGRAPH:
+  "NEVARA was built to create that infrastructure. Not another voluntary
+   carbon programme. Not another intermediary. A permanent, verifiable
+   digital ledger — built on the provenance of SHA-256 cryptography and
+   the precision of satellite monitoring — that makes every blue carbon
+   credit provably real, provably unique, and provably valuable."
+
+THREE MISSION PILLARS (grid-cols-3, gap-6, mt-12):
+  Transparency: Every credit traceable to a GPS coordinate, a verifier, and a blockchain block.
+  Equity: 60% of every credit sale goes directly to the community or institution that protects the land.
+  Scale: Built for India's entire coastline — not a pilot, a template for national carbon infrastructure.
+
+════════════════════════════════════════════════════════════════════════════════
+THE ORIGIN STORY
+bg-[#040D0B], py-20, 2-column layout
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "The Founder's Story"
+
+Left Column (text content, max-w-xl):
+  HEADING (Syne, text-3xl): "A Realization on the Coastline."
+  BODY:
+    "NEVARA began with a question: why does India's most powerful
+     natural climate asset — its 7,500 km of mangrove-lined coastline —
+     generate zero economic return for the communities that protect it?
+     The answer was not a lack of value. It was a lack of verifiable,
+     accessible measurement."
+
+  PARAGRAPH 2:
+    "Tahir Tamam, a 3rd-year Computer Science undergraduate at Ballari
+     Institute of Technology and Management (BITM), Karnataka, began
+     building NEVARA in 2024 — merging blockchain engineering with
+     environmental science to produce India's first fully deployed
+     blue carbon registry. Six months later, the platform was live
+     on AWS EC2, a patent was filed, and India's first AI-monitored
+     blue carbon pilot site was active at the Gurupur river estuary,
+     Mangalore."
+
+  PARAGRAPH 3:
+    "NEVARA was not built for a hackathon. It was built because the
+     problem was real, the market gap was documented, and the
+     technology to solve it existed — it had simply never been
+     assembled for India's coastal regulatory environment."
+
+Right Column (credentials card, p-8, rounded-2xl, border border-teal-800/30, bg-teal-950/10):
+  Heading: "Founder" (text-xs, teal-400, uppercase, tracking-widest)
+  Name: "Tahir Tamam"
+  Institution: "B.E. Computer Science, BITM Ballari, Karnataka · 2023–2027"
+  Credential rows:
+    ⬡ Filed Indian Patent — Application No. 202541114138 (Nov 2025)
+    ◎ Built & deployed NEVARA end-to-end in 6 months
+    ◈ 14 production modules · 42 API endpoints · AWS EC2 live
+    ◇ Active engagement: DCF Mangalore, NITK Surathkal, CMFRI
+    ◆ Aligned with CCTS 2026, Verra VM0033, Green Credit Rules 2025
+
+════════════════════════════════════════════════════════════════════════════════
+THE VISION
+bg-[#060F0C], py-20, centered
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "Where We Are Going"
+HEADING (Syne, text-3xl):
+  "The Default Digital Backbone"
+  "of India's Carbon Market."
+
+BODY (text-lg, text-gray-400, max-w-2xl, mx-auto, text-center):
+  "The vision is not to become another carbon credit platform.
+   The vision is to become the infrastructure layer that every
+   other participant in India's carbon market depends on —
+   the public ledger of record for nature-based solutions,
+   starting with the coastlines of Karnataka and expanding
+   to every coastal state in India."
+
+THREE VISION MILESTONES (grid-cols-3, gap-5, mt-12, text-center):
+
+  Short-term (2026):
+    Label: "2026"  (teal-400)
+    Title: "National Registry"
+    Body: "NEVARA becomes the operational offset registry for
+           CCTS-obligated industries via BEE integration —
+           providing India's 490 mandated entities with a
+           credible, traceable blue carbon offset source."
+
+  Mid-term (2027):
+    Label: "2027"  (emerald-400)
+    Title: "International Credits"
+    Body: "Article 6.4 eligibility enables NEVARA credits to be
+           traded across borders — positioning Indian coastal
+           ecosystems on the global voluntary carbon market for
+           the first time."
+
+  Long-term (2030):
+    Label: "2030+"  (blue-400)
+    Title: "National Infrastructure"
+    Body: "NEVARA operates as the default verification and registry
+           layer for India's Green Credit Programme, CCTS Offset
+           Mechanism, and international nature-based solution
+           credits — the digital land registry for India's coast."
+
+════════════════════════════════════════════════════════════════════════════════
+SCIENTIFIC & INSTITUTIONAL PARTNERS
+bg-[#040D0B], py-20
+════════════════════════════════════════════════════════════════════════════════
+
+LABEL: "Partners in Scientific Rigour"
+HEADING (Syne, text-2xl): "Built With, Not Around, Institutional Science."
+
+BODY (text-gray-400, max-w-xl):
+  "NEVARA's verification methodology is developed in collaboration
+   with India's leading coastal science institutions — not as
+   clients, but as technical partners who inform the scientific
+   credibility of every credit issued."
+
+PARTNER CARDS (grid-cols-2 md:grid-cols-3, gap-5, mt-10):
+
+  Partner 1 — ICAR-CMFRI Mangalore (border-teal-800/30):
+    Title: "ICAR-CMFRI"
+    Sub:   "Central Marine Fisheries Research Institute, Mangalore"
+    Role:  "Biodiversity datasets · Marine carbon stock validation ·
+            Coastal climate change vulnerability assessment"
+    Contact: "Dr. Sujitha Thomas, Head & Principal Scientist"
+
+  Partner 2 — NITK Surathkal (border-emerald-800/30):
+    Title: "NITK Surathkal"
+    Sub:   "National Institute of Technology Karnataka · WROE Dept"
+    Role:  "Coastal hydraulics · LiDAR data · MRV methodology
+            development · Wave energy interaction modelling"
+    Contact: "Dr. Ramesh H, Head of WROE"
+
+  Partner 3 — Mangalore Forest Division (border-blue-800/30):
+    Title: "Karnataka Forest Division"
+    Sub:   "Dakshina Kannada District Forest Department"
+    Role:  "Land parcel identification · CRZ clearance facilitation ·
+            Government contributor onboarding pathway"
+    Contact: "Deputy Conservator of Forests (DCF), Mangalore"
+
+  Partner 4 — OPSA Trust (border-amber-800/30):
+    Title: "OPSA Trust"
+    Sub:   "Mangrove Restoration & Community Climate Action"
+    Role:  "Community onboarding · Field operations · Restoration
+            site identification · Community FPIC facilitation"
+    Contact: "+91 9439256512"
+
+  Partner 5 — KSCZMA (border-purple-800/30):
+    Title: "KSCZMA"
+    Sub:   "Karnataka State Coastal Zone Management Authority"
+    Role:  "CRZ regulatory compliance · Coastal boundary validation ·
+            State-level environmental clearance pathway"
+    Contact: "Regional Director, Mangalore Office"
+
+════════════════════════════════════════════════════════════════════════════════
+CLOSING STATEMENT
+bg-gradient teal-950/20, py-20, centered
+════════════════════════════════════════════════════════════════════════════════
+
+QUOTE (text-2xl → text-3xl, italic, font-light, text-white, max-w-2xl):
+  "The vision is not a feature. It is a market — where a fishing
+   community in Mangalore earns a transparent, verifiable income
+   from the carbon their coastline sequesters, and a corporate
+   buyer in Mumbai can verify that income source to a specific
+   block on an immutable ledger."
+
+ATTRIBUTION: "— Tahir Tamam, Founder, NEVARA"
+
+CTA: "Join the Registry →"  → /login
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+IMPLEMENTATION NOTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ROUTING (React Router / Wouter):
+  /               → Landing.tsx    (Home — 4 sections)
+  /how-it-works   → HowItWorks.tsx
+  /why-nevara     → WhyNevara.tsx
+  /roadmap        → Roadmap.tsx    (merged roadmap + future plans)
+  /about          → About.tsx
+
+SHARED COMPONENTS (create once, import everywhere):
+  <NavBar />       — fixed, scroll-aware, all nav links
+  <Footer />       — minimal, same across all pages
+  <SubHero />      — label + title + subtitle, used on all subpages
+  <Fade />         — scroll-triggered fade-in wrapper
+  <SectionLabel /> — text-xs teal uppercase tracking label
+
+DESIGN TOKENS (all pages):
+  bg-primary:   #040D0B
+  bg-secondary: #060F0C
+  brand:        teal-500 (#14b8a6)
+  font-display: 'Syne' (700, 800)
+  font-body:    'DM Sans' (300, 400, 500)
+  font-mono:    'JetBrains Mono' (400)
+
+NO-MENTION LIST (never appear on landing or subpages):
+  × AWS EC2, RDS, PostgreSQL, Drizzle ORM, PM2
+  × Server architecture details
+  × "Pilot" framing on home page (use "Registry")
+  × Inflated AI claims (always "AI-assisted", "ML-based", never "100% autonomous")
+  × Competitor names (Verra/Gold Standard only as compliance standards, not competitors)
+
+LEGALLY SAFE CLAIMS (all verified against source data):
+  ✓ 11,098 km coastline — Ministry of Shipping / Indian National Centre for Ocean Information Services
+  ✓ 4,991 sq km mangroves — India State of Forest Report 2023 (FSI)
+  ✓ 4.9M tons annual CO₂e — IUCN Blue Carbon Initiative / Fourqurean et al.
+  ✓ $49.4B market — IEEFA India Carbon Market 2030 projection
+  ✓ 490 obligated entities — PIB Government press release, Jan 2026
+  ✓ 20–30% blue carbon premium — Verra voluntary market data
+  ✓ Patent No. 202541114138 — Filed November 2025, India Patent Office
+
+================================================================================
+END OF CONTENT STRUCTURE
+================================================================================

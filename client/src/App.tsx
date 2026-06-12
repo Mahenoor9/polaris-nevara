@@ -10,19 +10,10 @@ import { ComplianceDisclaimer } from "./components/compliance-disclaimer";
 import { NotificationProvider } from "./components/notification-center";
 import { OfflineBanner } from "./components/offline-banner";
 import NewLanding from "./pages/new-landing/Landing";
-import HowItWorks from "./pages/new-landing/HowItWorks";
-import WhyNevara from "./pages/new-landing/WhyNevara";
-import Roadmap from "./pages/new-landing/Roadmap";
-import About from "./pages/new-landing/About";
 import Login from "./pages/login";
 import UserDashboard from "./pages/user-dashboard";
 import OperationsDashboard from "./pages/operations-dashboard";
 import NotFound from "./pages/not-found";
-import TermsOfService from "./pages/terms";
-import PrivacyPolicy from "./pages/privacy";
-import MRVReport from "./pages/mrv-report";
-import ProjectIntelligenceOverview from "./pages/project-intelligence";
-import PublicProjectPage from "./pages/public-project";
 
 function ProtectedRoute({
   component: Component,
@@ -63,19 +54,10 @@ function ProtectedRoute({
 }
 
 function Router() {
-  const { isAuthenticated } = useAuth();
-
   return (
     <>
       <Switch>
         <Route path="/" component={NewLanding} />
-        <Route path="/how-it-works" component={HowItWorks} />
-        <Route path="/why-nevara" component={WhyNevara} />
-        <Route path="/roadmap" component={Roadmap} />
-        <Route path="/about" component={About} />
-
-        {/* Public transparency pages — no auth, no navbar */}
-        <Route path="/projects/:id/transparency" component={PublicProjectPage} />
 
         {/* Platform Routes with Navbar */}
         <Route path="/*">
@@ -91,9 +73,6 @@ function Router() {
                 <Route path="/operations">
                   {() => <ProtectedRoute component={OperationsDashboard} allowedRoles={['verifier', 'admin']} />}
                 </Route>
-                <Route path="/operations/project/:id">
-                  {() => <ProtectedRoute component={ProjectIntelligenceOverview} allowedRoles={['verifier', 'admin']} />}
-                </Route>
                 {/* Legacy route redirects */}
                 <Route path="/admin">
                   {() => <Redirect to="/operations" />}
@@ -101,12 +80,6 @@ function Router() {
                 <Route path="/verifier">
                   {() => <Redirect to="/operations" />}
                 </Route>
-                <Route path="/verifier/project/:id">
-                  {(params: any) => <Redirect to={`/operations/project/${params?.id ?? ''}`} />}
-                </Route>
-                <Route path="/terms" component={TermsOfService} />
-                <Route path="/privacy" component={PrivacyPolicy} />
-                <Route path="/projects/:id/mrv-report" component={MRVReport} />
                 <Route component={NotFound} />
               </Switch>
             </>
