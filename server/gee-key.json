@@ -1,0 +1,7 @@
+{
+  "type": "service_account",
+  "project_id": "mock-project",
+  "private_key_id": "mock-id",
+  "private_key": "MOCK_KEY",
+  "client_email": "mock@mock.iam.gserviceaccount.com"
+}
